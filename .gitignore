@@ -2,11 +2,9 @@
 vendor/
 composer.json
 composer.lock
-<<<<<<< HEAD
 /nbproject/private/
 nbproject/
-=======
 test.nb0zIzivpKsc++FbpmrRczVTR2IwajAxNXV5T0JEV2lOc1lNRlowdUxYRW1JZEJJd1NHWXd2ZkpIR0E9.php
 test.txt
 devForUserFold/
->>>>>>> 9d4784c (Travail en cours)
+
