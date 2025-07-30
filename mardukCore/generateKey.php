@@ -38,20 +38,22 @@ class generateKey {
         $explodePath = explode("/", $stringUnchiffred);
         if (count($explodePath) === 2) {
             $arrayPath = explode(".", $explodePath[1]);
-            if ($arrayPath[1] === "php" && count($arrayPath) === 2) {
+            if ($arrayPath[2] === "php" && count($arrayPath) === 3) {
                 $stringChiffred = $this->chiffredString($stringUnchiffred);
-                $pathNewNotFolder = $arrayPath[0].".".$stringChiffred.".php";
+                $pathNewNotFolder = $arrayPath[0].".".$stringChiffred.".dev.php";
                 $pathNew = $explodePath[0]."/".$pathNewNotFolder;
                 
                 
-                $keyPossible = array_search($pathNew, scandir($explodePath[0]."/"));
-                var_dump(($keyPossible));
-                echo "class/".$explodePath[1]." ";
-                echo "class/".$pathNewNotFolder;
-                if ($keyPossible === false) {
-                    rename("class/".$explodePath[1], "class/".$pathNewNotFolder);
+                $keyPossible = array_search($explodePath[1], scandir($explodePath[0]."/"));
+
+                
+                if ($keyPossible != false) {
+
+                    rename($stringUnchiffred, "$explodePath[0]/".$pathNewNotFolder);
+                } else {
+                    echo "Clés déjà inséré!";
                 }
-                var_dump($keyPossible);
+
                 
             }
         }

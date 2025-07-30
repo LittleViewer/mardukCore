@@ -2,4 +2,5 @@
 
 require_once 'mardukCore/generateKey.php';
 
-new generateKey("devForUserFold");
+$generateKey = new generateKey("devForUserFold/pageTest.dev.php");
+
