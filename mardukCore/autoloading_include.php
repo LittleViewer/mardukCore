@@ -33,8 +33,8 @@ class autoloading_include {
 
                 if ($fold != "." AND $fold != ".." && $fold != "autoloading_include.php") {
                     $foldArray = explode(".", $fold);
-                    if (count($foldArray) === 2 && $foldArray[1] === "php" && is_readable($dir.$fold)) {
 
+                    if (count($foldArray) === 4 && $foldArray[3] === "php" && $foldArray[2] === "dev") {
                         array_push($dirProper, $fold);
                     }
                 }
@@ -94,7 +94,9 @@ class autoloading_include {
             
             foreach ($this->instanceClass[0] as $instance) {
                 array_push($variableInstance, eval("return $instance"));
+
             }
+            
             return $variableInstance;
     }
     
