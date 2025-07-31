@@ -13,9 +13,7 @@ class autoloading_include {
      */
     public function __construct($dir= null) {
         $foldClassArray  = $this->scandDir($dir);
-        
-        $this->instanceClass = $this->requireAutomatic($foldClassArray, $dir);
-        
+        $this->instanceClass = $this->requireAutomatic($foldClassArray, $dir."/");
         $this->returnInstance();
             }
 
@@ -24,6 +22,7 @@ class autoloading_include {
     * @param string $dir
     */
     private function scandDir($dir) {
+        require_once 'securityComponement/generateKey.php';
         if (isset($dir)) {
 
             $dirProper = [];
@@ -33,8 +32,9 @@ class autoloading_include {
 
                 if ($fold != "." AND $fold != ".." && $fold != "autoloading_include.php") {
                     $foldArray = explode(".", $fold);
-
-                    if (count($foldArray) === 4 && $foldArray[3] === "php" && $foldArray[2] === "dev") {
+                    $validityKey = new generateKey();
+                    if (count($foldArray) === 4 && $foldArray[3] === "php" && $foldArray[2] === "dev" &&
+                        $validityKey->verifyKey($fold) === true) {
                         array_push($dirProper, $fold);
                     }
                 }
