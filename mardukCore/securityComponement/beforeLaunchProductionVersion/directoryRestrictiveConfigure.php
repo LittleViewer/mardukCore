@@ -51,7 +51,7 @@ class directoryRestrictiveConfigure {
      * @return array
      */
     private function scanDirVerifyDoNotExist($filename) {
-        $arrayDirectory = scandir(__dir__ . "/directoryAwaitMove/");
+        $arrayDirectory = scandir("/etc/apache2/conf-available/");
         if (array_search($filename, $arrayDirectory) === false) {
             return [true, "fileNotExist"];
         } else {
