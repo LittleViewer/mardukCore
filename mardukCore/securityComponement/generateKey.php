@@ -14,7 +14,6 @@ class generateKey {
      * PS: Veuillez ne pas changer votre password sans retirer les clès des nom des fichier authentifier et d'en regénéré de nouvelle.
      * @author LittleViewer
      * @version 1.0.0
-     * @see 
      */
     
     private $encryptionKey;
