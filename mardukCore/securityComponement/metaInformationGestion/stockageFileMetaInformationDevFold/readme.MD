@@ -1,0 +1,1 @@
+Metadata storage sub-dir via companion file
