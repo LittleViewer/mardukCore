@@ -1,7 +1,5 @@
 <?php
-
-require_once '/var/www/html/mardukCore/vendor/autoload.php';
-
+require_once __dir__.'/../../vendor/autoload.php';
 use Dotenv\Dotenv;
 
 class generateKey {
@@ -17,29 +15,35 @@ class generateKey {
      */
     
     private $encryptionKey;
-
+    private $dotEnv;
+    private $nameEncrypted;
+    
     /**
      * Gère tout la première partie de la classe composer de function privé
      * @param string $stringUnchiffred
      */
     public function __construct($stringUnchiffred = null) {
-
         if (!is_null($stringUnchiffred)) {
+            $this->callDotenv();
             $this->findEnvKey();
             $this->chiffredPageDev($stringUnchiffred);
         }
     }
 
+    
     /**
      * Récupére la clès de l'utilisateur qu'i l'as définit dans sont variable d'environonnement dans le fichier enfant de se fichier thisdir/env,
      * La récupéré de la variables/clès est géré part Dotenv pour des question de simplificité et efficacité
      * @todo Internaliser la récupéré de manière sécurisé et privé de la variables d'environnement afin d'exclure la dépendance
      * @throws Exception
      */
+    
+    private function callDotenv(){
+        $dotEnv = Dotenv::createImmutable(__dir__."/env/");
+        $this->dotEnv = $dotEnv;
+    }
     private function findEnvKey() {
-
-        $dotenv = Dotenv::createImmutable(__DIR__ . "/env");
-        $dotenv->safeLoad();
+         $this->dotEnv->safeLoad();
         $encryptionKey = $_ENV['APP_SECRET'] ?? throw new Exception("Clé manquante");
         $this->encryptionKey = $encryptionKey;
     }
@@ -75,7 +79,7 @@ class generateKey {
                 $keyPossible = array_search($explodePath[1], scandir($explodePath[0] . "/"));
 
                 if ($keyPossible != false) {
-
+                    $this->nameEncrypted = "$explodePath[0]/" . $pathNewNotFolder;
                     rename($stringUnchiffred, "$explodePath[0]/" . $pathNewNotFolder);
                 } else {
                     echo "Clés déjà inséré!";
@@ -90,10 +94,10 @@ class generateKey {
      * @param string $dir
      * @return bool
      */
-    public function verifyKey($nameEncrypted,$dir="devForUserFold/",) {
-        $this->findEnvKey();
+    public function verifyKey($nameEncrypted,$dir="devForUserFold/") {
+        $this->callDotenv();
+        $this->findEnvKey( $this->dotEnv);
         $arrayNameEncrypted = explode(".", $nameEncrypted);
-        
         if (count($arrayNameEncrypted) === 4 && $arrayNameEncrypted[2] === "dev" && $arrayNameEncrypted[3] === "php") {
             $ivAndKey = explode("thisnotgoodofattemptodecryptthistext",(base64_decode($arrayNameEncrypted[1])));
             $uncryptKey = openssl_decrypt($ivAndKey[1], 'aes-256-cbc', $this->encryptionKey,0,$ivAndKey[0]);
@@ -108,5 +112,16 @@ class generateKey {
         } else {
             echo "Bad file format!";
         }
+    }
+    
+    public function returnNameEncrypted() {
+        return $this->nameEncrypted;
+    }
+
+
+    public function returnDotEnv(){
+        $this->callDotenv();
+        $this->findEnvKey();
+        return $this->encryptionKey;
     }
 }
