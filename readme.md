@@ -29,6 +29,3 @@ sudo htpasswd -cb /etc/apache2/mardukCoreClassDev.htpasswd [username] [password]
 for adduser<br>
 sudo htpasswd -b /etc/apache2/mardukCoreClassDev.htpasswd [username] [password]<br>
 
-**gestion of metadata**
-chmod -R 770 stockageFileMetaInformationDevFold/
-chmod g+s stockageFileMetaInformationDevFold/
