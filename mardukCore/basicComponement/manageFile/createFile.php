@@ -19,21 +19,12 @@ class createFile {
             exit();
         } else {
             $formlizeExtension = $this->formatExtension($usageFile, $isValidateFormat[0]);
-
             if ($formlizeExtension[2] === false) {
-                echo $formlizeExtension[0];
                 exit();
             } else {
                 $isExistFile = $this->isFileExist($dir, $filename);
-                if ($isExistFile[1] === false) {
-                    exit();
-                } else {
-                    if (count(explode(".", $filename)) === 1) {
-                        echo count(explode(".", $filename))."<br>";
-                    } else {
-                        $this->createFile($dir . $filename . $formlizeExtension[0]);
-                    }
-                }
+                $this->createFile($dir . $filename . $formlizeExtension[0]);
+                
             }
         }
     }
@@ -56,7 +47,6 @@ class createFile {
         $arrayExtensionWill = explode(".", $userWillExtension);
         foreach ($arrayExtensionAllow as $extensionWill) {
             if (array_search($extensionWill, $arrayExtensionWill) === false) {
-                
             } else {
                 return [$extensionWill, true];
             }
@@ -77,6 +67,9 @@ class createFile {
         } elseif ($usageFile === "metaData" && $extensionSimple === "json") {
             $subExtension = "mdt";
             return [".mdt.$extensionSimple", $subExtension, true];
+            } elseif ($usageFile === "log" && $extensionSimple === "txt") {
+            $subExtension = "lg";
+            return [".lg.$extensionSimple", $subExtension, true];
         } else {
             return ["No Defined Use", null, false];
         }
@@ -114,11 +107,12 @@ class createFile {
      * @param string $extension
      */
     private function createFile($path) {
-        include_once __dir__ . '/../../securityComponement/generateKey.php';
+        
         fopen($path, "a");
         
         $this->nameFile = $path;
     }
+    
 
     public function returnNameFile() {
         return $this->nameFile;

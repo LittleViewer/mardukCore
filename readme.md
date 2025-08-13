@@ -29,3 +29,8 @@ sudo htpasswd -cb /etc/apache2/mardukCoreClassDev.htpasswd [username] [password]
 for adduser<br>
 sudo htpasswd -b /etc/apache2/mardukCoreClassDev.htpasswd [username] [password]<br>
 
+*for configure logZone*
+setfacl -R -d -m u::rwx,g::rwx,o::--- /var/www/html/mardukCore/mardukCore/exceptionLog/ <br>
+setfacl -R -m u::rwx,g::rwx,o::--- /var/www/html/mardukCore/mardukCore/exceptionLog/<br>
+
+

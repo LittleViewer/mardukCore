@@ -1,0 +1,12 @@
+[2025-08-13 01:58:05(UTC+2)] 0, Unknow Error., #0 /var/www/html/mardukCore/index.php(8): extendExceptionMarduk->unknowException()
+#1 {main}
+[2025-08-13 01:58:05(UTC+2)] 0, Unknow Error., #0 /var/www/html/mardukCore/index.php(8): extendExceptionMarduk->unknowException()
+#1 {main}
+[2025-08-13 01:58:05(UTC+2)] 0, Unknow Error., #0 /var/www/html/mardukCore/index.php(8): extendExceptionMarduk->unknowException()
+#1 {main}
+[2025-08-13 01:58:06(UTC+2)] 0, Unknow Error., #0 /var/www/html/mardukCore/index.php(8): extendExceptionMarduk->unknowException()
+#1 {main}
+[2025-08-13 01:58:06(UTC+2)] 0, Unknow Error., #0 /var/www/html/mardukCore/index.php(8): extendExceptionMarduk->unknowException()
+#1 {main}
+[2025-08-13 01:58:06(UTC+2)] 0, Unknow Error., #0 /var/www/html/mardukCore/index.php(8): extendExceptionMarduk->unknowException()
+#1 {main}
